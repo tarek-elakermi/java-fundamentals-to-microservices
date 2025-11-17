@@ -1,4 +1,4 @@
-# Java & Spring Mastery Journey 🚀  
+# Java & Spring Mastery Journey   
 A personal roadmap following a 6-month structured learning path to master Java, Spring Boot, microservices, and system design.
 This repository documents **every step** of my journey — code, notes, exercises, challenges, and mini-projects.
 ---
@@ -44,7 +44,7 @@ This repository documents **every step** of my journey — code, notes, exercise
 
 ---
 
-## 📘 Week-by-Week Notes
+##  Week-by-Week Notes
 
 ### **Week 1 — Java Fundamentals**
 - Practicing Streams, Optionals  
@@ -53,12 +53,12 @@ This repository documents **every step** of my journey — code, notes, exercise
 
 ---
 
-## 🧪 Testing  
+##  Testing  
 All exercises include JUnit 5 tests.  
 
 ---
 
-## 🧰 Tools  
+##  Tools  
 - Java 17  
 - Maven  
 - IntelliJ  
@@ -66,7 +66,7 @@ All exercises include JUnit 5 tests.
 
 ---
 
-## 🔄 Changelog  
+##  Changelog  
 Every update includes a commit and a README change.
 
 - `2025-11-17` — Repository created, Week 1 started.  
