@@ -1,0 +1,65 @@
+1 - Basic filters
+
+Filter cars with price > 50_000
+
+Filter cars with year < 2000
+
+Filter cars with color "Pink"
+
+Filter cars with make "Toyota"
+
+Filter cars with model starting with "M"
+
+Filter cars with id > 100
+
+Filter cars whose color is not "Blue"
+
+2 - Combined filters
+
+Filter cars with price > 40_000 and color "Yellow"
+
+Filter Ford cars with year > 2005
+
+Filter Toyota cars with price < 30_000
+
+Filter cars with year between 2000 and 2010
+
+Filter cars with price between 20_000 and 60_000
+
+Filter blue cars made before 2005
+
+Filter Lexus cars with color "Pink"
+
+Filter Audi cars with price > 40_000 and year < 2010
+
+Filter cars with make "BMW" or "Mercedes-Benz"
+
+Filter Mitsubishi cars whose model contains "Gal"
+
+Filter cars with price < 10_000 or year < 1990
+
+Filter cars with model length > 10 characters
+
+Filter cars where color is "Teal" AND year is 1995
+
+3 - Advanced filters
+
+Filter cars where make starts with "C"
+
+Filter cars where model ends with "X"
+
+Filter cars whose price string ends with ".54"
+
+Filter cars with color in ("Red", "Blue", "Green")
+
+Filter cars whose make is NOT ("Ford", "Toyota")
+
+Filter cars with year % 2 == 0 (even year)
+
+Filter cars with price parsed to double >= 80_000
+
+Filter cars with id divisible by 5
+
+Filter cars where model contains a space
+
+Filter cars whose color contains the letter 'u'

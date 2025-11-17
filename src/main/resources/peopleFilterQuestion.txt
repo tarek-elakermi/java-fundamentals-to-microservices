@@ -1,0 +1,65 @@
+1 - Basic filters
+
+Filter people older than 50
+
+Filter female people
+
+Filter male people
+
+Filter people aged < 10
+
+Filter people whose firstName starts with "A"
+
+Filter people whose lastName ends with "n"
+
+Filter people with id > 100
+
+Filter people whose email contains "google"
+
+2 - Combined filters
+
+Filter female people older than 70
+
+Filter males between ages 30 and 40
+
+Filter people younger than 5 AND gender "Male"
+
+Filter people aged > 60 OR gender "Female"
+
+Filter people whose firstName length > 6
+
+Filter people whose email ends with ".ru"
+
+Filter people whose lastName contains "son"
+
+Filter males aged exactly 38
+
+Filter females aged between 20 and 40
+
+Filter people with firstName starting with vowel
+
+Filter people with age % 2 == 1 (odd ages)
+
+Filter people whose email provider is gmail.com (contains “gmail”)
+
+3 - Advanced filters
+
+Filter people where full name length > 15
+
+Filter people whose lastName starts with same letter as firstName
+
+Filter people whose email username (before '@') has more than 8 characters
+
+Filter people whose age is the oldest age in the list (you find max first)
+
+Filter people whose gender != "Male"
+
+Filter people whose firstName contains repeated letters
+
+Filter people with lastName containing an apostrophe '
+
+Filter people with ids divisible by 3
+
+Filter people whose age is a prime number
+
+Filter people with email domain ending in .edu
