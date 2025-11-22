@@ -4,7 +4,11 @@ import org.example.learning.mini_exercise.datamocking.MockData;
 import org.example.learning.mini_exercise.entities.Person;
 import org.junit.Test;
 
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class DistinctAndSets {
 
@@ -25,10 +29,9 @@ public class DistinctAndSets {
      */
     @Test
     public void distinct() throws Exception {
-        List<Integer> numbers = List.of(
-                1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,9,9,9
-        );
-        // numbers.stream().distinct()
+        List<Integer> numbers = List.of(1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,9,9,9);
+        List<Integer> list = numbers.stream().distinct().toList();
+        System.out.println(list);
     }
 
 
@@ -49,12 +52,13 @@ public class DistinctAndSets {
      */
     @Test
     public void distinctWithSet() throws Exception {
-        List<Integer> numbers = List.of(
-                1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,9,9,9
-        );
+        List<Integer> numbers = List.of(1,1,2,2,5,5,3,3,4,4,6,6,8,8,7,7,9,9,9,9,9);
         // new HashSet<>(numbers)
+        System.out.println(new HashSet<>(numbers));
         // new LinkedHashSet<>(numbers)
+        System.out.println(new LinkedHashSet<>(numbers));
         // new TreeSet<>(numbers)
+        System.out.println(new TreeSet<>(numbers));
     }
 
 
@@ -73,8 +77,13 @@ public class DistinctAndSets {
     @Test
     public void distinctOnCustomObjects() throws Exception {
         List<Person> people = MockData.getPeople();
-        // people.stream().distinct()
+        List<Person> list = people.stream().distinct().toList();
+        System.out.println(list.size());
+        list.forEach(System.out::println); // it always shows the added element 1001
         // Only works if Person has equals + hashCode
+
+        // after generating the equals and hash excluding the id the distinc now it works and it exclude the person 1001 that
+        // have same content as person with id 1000
     }
 
 
@@ -90,7 +99,7 @@ public class DistinctAndSets {
         List<Integer> numbers = List.of(
                 1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,9
         );
-        // numbers.stream().distinct().sorted()
+//        System.out.println(numbers.stream().distinct().sorted());;
     }
 
 

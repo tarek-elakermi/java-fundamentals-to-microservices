@@ -1,5 +1,7 @@
 package org.example.learning.mini_exercise.entities;
 
+import java.util.Objects;
+
 public class Person {
 
     private final Integer id;
@@ -57,5 +59,18 @@ public class Person {
                 ", gender='" + gender + '\'' +
                 ", age=" + age +
                 '}';
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return Objects.equals(firstName, person.firstName) && Objects.equals(lastName, person.lastName) && Objects.equals(email, person.email) && Objects.equals(gender, person.gender) && Objects.equals(age, person.age);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, email, gender, age);
     }
 }
