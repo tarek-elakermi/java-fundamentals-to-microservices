@@ -1,5 +1,6 @@
 package org.example.learning.mini_exercise.examples;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.learning.mini_exercise.datamocking.MockData;
 import org.example.learning.mini_exercise.entities.Car;
 import org.junit.Test;
@@ -7,6 +8,9 @@ import org.junit.Test;
 import java.util.List;
 
 public class StatisticsWithStreams {
+
+    private static final ObjectMapper mapper = new ObjectMapper();
+
 
     // 8 - Test count: count how many cars match a condition.
     //     Example: count cars with price > 50_000.

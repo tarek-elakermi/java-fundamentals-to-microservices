@@ -4,11 +4,9 @@ import org.example.learning.mini_exercise.datamocking.MockData;
 import org.example.learning.mini_exercise.entities.Person;
 import org.junit.Test;
 
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class DistinctAndSets {
 
@@ -96,10 +94,9 @@ public class DistinctAndSets {
      */
     @Test
     public void distinctAndSorted() throws Exception {
-        List<Integer> numbers = List.of(
-                1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,9
-        );
-//        System.out.println(numbers.stream().distinct().sorted());;
+        List<Integer> numbers = List.of(1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,9);
+        List<Integer> list = numbers.stream().distinct().sorted().toList();
+        System.out.println(list);
     }
 
 
@@ -115,8 +112,13 @@ public class DistinctAndSets {
     @Test
     public void countRemovedDuplicates() throws Exception {
         List<Integer> numbers = List.of(
-                1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,9
+                1,1,2,2,3,3,4,4,5,5,6,6,6,7,7,8,8,9,9,9,9
         );
+        System.out.println("Original size: "+numbers.size());
+        long count = numbers.stream().distinct().count();
+        System.out.println("Distinct size: " + count);
         // Compare list.size() vs stream.distinct().count()
+        System.out.println("Removed duplicates: " + (numbers.size() - count));
+
     }
 }

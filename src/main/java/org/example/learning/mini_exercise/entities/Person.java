@@ -2,7 +2,7 @@ package org.example.learning.mini_exercise.entities;
 
 import java.util.Objects;
 
-public class Person {
+public class Person{
 
     private final Integer id;
     private final String firstName;
@@ -73,4 +73,5 @@ public class Person {
     public int hashCode() {
         return Objects.hash(firstName, lastName, email, gender, age);
     }
+
 }
