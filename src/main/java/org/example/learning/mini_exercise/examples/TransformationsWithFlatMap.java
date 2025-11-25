@@ -1,10 +1,15 @@
 package org.example.learning.mini_exercise.examples;
 
+import org.example.learning.mini_exercise.datamocking.MockData;
+import org.example.learning.mini_exercise.entities.Car;
+import org.example.learning.mini_exercise.entities.Person;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TransformationsWithFlatMap {
@@ -50,9 +55,7 @@ public class TransformationsWithFlatMap {
                 Optional.of("Amigos"),
                 Optional.of("Code")
         );
-
         System.out.println(optionals);
-
         List<String> list = optionals.stream().flatMap(Optional::stream).toList();
         System.out.println(list);
 
@@ -68,9 +71,13 @@ public class TransformationsWithFlatMap {
                 Set.of("Go", "Rust", "Kotlin", "Java"),
                 Set.of("Swift", "Dart")
         );
-
         // Goal: Convert List<Set<String>> into List<String>
         // Expected: Flatten all sets and remove duplicates? Or keep duplicates?
+        System.out.println(listOfSets);
+        List<String> list = listOfSets.stream()
+                .flatMap(Set::stream)
+                .toList();
+        System.out.println(list);
     }
 
     // 5 - Flatten nested arrays
@@ -83,8 +90,11 @@ public class TransformationsWithFlatMap {
                 {"Home", "Furniture", "Appliances", "Decor"},
                 {"Sports", "Equipment", "Apparel"}
         };
-
         // Goal: Convert String[][] into List<String>
+        List<String> list = Arrays.stream(nestedArrays)
+                .flatMap(Arrays::stream)
+                .toList();
+        System.out.println(list);
     }
 
     // 6 - Extract all words from sentences
@@ -97,8 +107,11 @@ public class TransformationsWithFlatMap {
                 "Java programming is object-oriented and platform independent",
                 "FlatMap is used to flatten nested structures in streams"
         );
-
         // Goal: Given List<String> of sentences, extract all words into a single list
+        List<String> list = sentences.stream()
+                .flatMap(sent -> Arrays.stream(sent.split("\\s+")))
+                .toList();
+        System.out.println(list);
     }
 
     // 7 - Flatten List of Optional Integers
@@ -114,8 +127,11 @@ public class TransformationsWithFlatMap {
                 Optional.of(15),
                 Optional.empty()
         );
-
         // Goal: Convert List<Optional<Integer>> into List<Integer>
+        List<Integer> list = optionalIntegers.stream()
+                .flatMap(Optional::stream)
+                .toList();
+        System.out.println(list);
     }
 
     // 8 - Flatten Map values
@@ -129,7 +145,16 @@ public class TransformationsWithFlatMap {
                 "HR", List.of("Jack", "Karen")
         );
 
+        //System.out.println(departmentEmployees);
         // Goal: Flatten all values of Map<String, List<String>> into a single list
+        List<String> list1 = departmentEmployees.keySet().stream()
+                .toList();
+        System.out.println(list1);
+        List<String> list = departmentEmployees.values().stream()
+                .flatMap(List::stream)
+                .toList();
+        System.out.println(list);
+
     }
 
     // 9 - Flatten List of Streams
@@ -143,6 +168,10 @@ public class TransformationsWithFlatMap {
         );
 
         // Goal: Convert List<Stream<String>> into a single List<String>
+        List<String> list = listOfStreams.stream()
+                .flatMap(st -> st.flatMap(Stream::of))
+                .toList();
+        System.out.println(list);
     }
 
     // 10 - Flatten nested Lists of Integers
@@ -157,6 +186,10 @@ public class TransformationsWithFlatMap {
         );
 
         // Goal: Convert List<List<Integer>> into List<Integer>
+        List<Integer> list1 = nestedIntegerLists.stream()
+                .flatMap(Collection::stream)
+                .toList();
+        System.out.println(list1);
     }
 
     // 11 - Flatten Optional of List
@@ -171,8 +204,12 @@ public class TransformationsWithFlatMap {
                 Optional.empty(),
                 Optional.of(List.of("G", "H", "I", "J"))
         );
-
         // Goal: Convert List<Optional<List<String>>> into List<String>
+        List<String> list = optionalLists.stream()
+                .flatMap(Optional::stream)
+                .flatMap(Collection::stream)
+                .toList();
+        System.out.println(list);
     }
 
     // 12 - Flatten a List of Arrays
@@ -184,8 +221,11 @@ public class TransformationsWithFlatMap {
                 new String[]{"Date", "Elderberry"},
                 new String[]{"Fig", "Grape", "Honeydew", "Ice Apple"}
         );
-
         // Goal: Convert List<String[]> into List<String>
+        List<String> list = listOfArrays.stream()
+                .flatMap(Arrays::stream)
+                .toList();
+        System.out.println(list);
     }
 
     // 13 - Flatten List of StringBuilders
@@ -199,8 +239,11 @@ public class TransformationsWithFlatMap {
                 new StringBuilder("API"),
                 new StringBuilder("FlatMap")
         );
-
         // Goal: Convert List<StringBuilder> containing multiple strings into List<String>
+        List<String> list = stringBuilders.stream()
+                .map(StringBuilder::toString)
+                .toList();
+        System.out.println(list);
     }
 
     // 14 - Flatten nested List of Optionals
@@ -213,8 +256,13 @@ public class TransformationsWithFlatMap {
                 List.of(Optional.of("Data4"), Optional.of("Data5"), Optional.empty()),
                 List.of(Optional.empty(), Optional.empty(), Optional.of("Data6"))
         );
-
         // Goal: Convert List<List<Optional<String>>> into List<String>
+        List<String> list = nestedOptionals.stream()
+                .flatMap(List::stream)
+                .flatMap(Optional::stream)
+                .toList();
+
+        System.out.println(list);
     }
 
     // 15 - Flatten Set of Lists
@@ -229,6 +277,10 @@ public class TransformationsWithFlatMap {
         );
 
         // Goal: Convert Set<List<String>> into List<String>
+        List<String> list = setOfLists.stream()
+                .flatMap(List::stream)
+                .toList();
+        System.out.println(list);
     }
 
     // 16 - Flatten List of Optional Lists
@@ -243,8 +295,12 @@ public class TransformationsWithFlatMap {
                 Optional.empty(),
                 Optional.of(List.of("ProjectG"))
         );
-
         // Goal: Convert List<Optional<List<String>>> into List<String>
+        List<String> list = listOfOptionalLists.stream()
+                .flatMap(Optional::stream)
+                .flatMap(List::stream)
+                .toList();
+        System.out.println(list);
     }
 
     // 17 - Flatten nested List of Maps
@@ -257,8 +313,11 @@ public class TransformationsWithFlatMap {
                 Map.of("key6", "value6"),
                 Map.of("key7", "value7", "key8", "value8")
         );
-
         // Goal: Convert List<Map<String, String>> into List<String> of all values
+        List<String> list = listOfMaps.stream()
+                .flatMap(map -> map.values().stream())
+                .toList();
+        System.out.println(list);
     }
 
     // 18 - Flatten List of Optionals with filter
@@ -276,8 +335,12 @@ public class TransformationsWithFlatMap {
                 Optional.of("FlatMapOperations"),
                 Optional.empty()
         );
-
         // Goal: Flatten List<Optional<String>> and keep only non-empty strings longer than 3 chars
+        List<String> list = optionalsWithFilter.stream()
+                .flatMap(Optional::stream)
+                .filter(str -> str.length() > 3)
+                .toList();
+        System.out.println(list);
     }
 
     // 19 - Flatten List of Lists and transform elements
@@ -292,6 +355,11 @@ public class TransformationsWithFlatMap {
         );
 
         // Goal: Flatten List<List<String>> and convert all strings to uppercase
+        List<String> list = listsToTransform.stream()
+                .flatMap(List::stream)
+                .map(String::toUpperCase)
+                .toList();
+        System.out.println(list);
     }
 
     // 20 - Flatten nested structure and remove duplicates
@@ -306,66 +374,51 @@ public class TransformationsWithFlatMap {
         );
 
         // Goal: Flatten List<List<String>> and return distinct elements only
+        List<String> list = listsWithDuplicates.stream()
+                .flatMap(Collection::stream)
+                .distinct()
+                .toList();
+        System.out.println(list);
     }
 
     // 1 - Flatten all car names
     @Test
-    public void flattenCarNames() {
+    public void flattenCarNames() throws IOException {
         // Goal: Flatten a List<List<String>> of car names (if cars had multiple names per brand)
+        List<Car> cars = MockData.getCars();
+        Map<String, List<Car>> collect = cars.stream()
+                .limit(20)
+                .collect(Collectors.groupingBy(Car::getMake, Collectors.toList()));
+        List<String> list = collect.values().stream()
+                .flatMap(car -> car.stream().map(Car::getModel))
+                .toList();
+        System.out.println(list);
+
+
     }
 
     // 2 - Flatten people emails
     @Test
-    public void flattenPeopleEmails() {
+    public void flattenPeopleEmails() throws IOException {
         // Goal: Flatten List<Optional<String>> of emails into List<String>
+        List<Person> people = MockData.getPeople();
+        List<String> list = people.stream()
+                .limit(10)
+                .map(Person::getEmail)
+                .toList();
+        System.out.println(list);
     }
 
     // 3 - Flatten all first and last names of people
     @Test
-    public void flattenPeopleFullNames() {
+    public void flattenPeopleFullNames() throws IOException {
         // Goal: Flatten first and last names of each person into a single List<String>
-    }
-
-    // 4 - Flatten all car features
-    @Test
-    public void flattenCarFeatures() {
-        // Goal: Each Car has a List<String> features; flatten all features into a single List<String>
-    }
-
-    // 5 - Flatten people phone numbers
-    @Test
-    public void flattenPeoplePhoneNumbers() {
-        // Goal: Each Person may have multiple phone numbers; flatten into a single List<String>
-    }
-
-    // 6 - Flatten people with optional middle names
-    @Test
-    public void flattenPeopleMiddleNames() {
-        // Goal: Flatten List<Optional<String>> middle names into List<String>
-    }
-
-    // 7 - Flatten all car colors
-    @Test
-    public void flattenCarColors() {
-        // Goal: Each Car has multiple colors; flatten all colors into a single List<String>
-    }
-
-    // 8 - Flatten nested lists of people addresses
-    @Test
-    public void flattenPeopleAddresses() {
-        // Goal: Each Person has List<List<String>> addresses; flatten into a single List<String>
-    }
-
-    // 9 - Flatten people hobbies
-    @Test
-    public void flattenPeopleHobbies() {
-        // Goal: Each Person has List<String> hobbies; flatten all hobbies into a single list
-    }
-
-    // 10 - Flatten all car owners
-    @Test
-    public void flattenCarOwners() {
-        // Goal: Each Car may have multiple owners (List<Person>); flatten all owners into a single List<Person>
+        List<Person> people = MockData.getPeople();
+        List<String> list = people.stream()
+                .limit(10)
+                .map(p -> p.getFirstName() + " " + p.getLastName())
+                .toList();
+        System.out.println(list);
     }
 }
 
