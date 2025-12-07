@@ -1,10 +1,8 @@
-package org.example.learning.mini_exercise.examples;
+package org.example.learning.mini_exercise.examplesStream;
 
 import org.example.learning.mini_exercise.datamocking.MockData;
 import org.example.learning.mini_exercise.entities.Car;
 import org.example.learning.mini_exercise.entities.Person;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.IOException;

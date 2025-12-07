@@ -1,4 +1,4 @@
-package org.example.learning.mini_exercise.examples;
+package org.example.learning.mini_exercise.examplesStream;
 
 import org.example.learning.mini_exercise.datamocking.MockData;
 import org.example.learning.mini_exercise.entities.Car;
@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 
@@ -383,6 +384,18 @@ public class StreamFilteringCars {
                 .toList();
         System.out.println(f.size());
         f.forEach(System.out::println);
+    }
+
+    @Test
+    public void af11() throws IOException {
+        List<Car> cars = MockData.getCars();
+
+        Optional<String> opt = cars.stream()
+                .filter(car -> "Blue".equalsIgnoreCase(car.getColor()))
+                .findFirst()
+                .map(Car::getModel);
+
+        System.out.println(opt);
     }
 
 

@@ -1,4 +1,4 @@
-package org.example.learning.mini_exercise.examples;
+package org.example.learning.mini_exercise.examplesStream;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,9 +11,6 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
-import java.util.OptionalDouble;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.hamcrest.MatcherAssert.assertThat;

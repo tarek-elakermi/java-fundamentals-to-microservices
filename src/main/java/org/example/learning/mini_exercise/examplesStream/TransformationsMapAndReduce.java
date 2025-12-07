@@ -1,4 +1,4 @@
-package org.example.learning.mini_exercise.examples;
+package org.example.learning.mini_exercise.examplesStream;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class TransformationsMapAndReduce {
 

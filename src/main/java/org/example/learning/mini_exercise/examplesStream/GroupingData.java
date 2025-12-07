@@ -1,4 +1,4 @@
-package org.example.learning.mini_exercise.examples;
+package org.example.learning.mini_exercise.examplesStream;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

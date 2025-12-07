@@ -1,12 +1,10 @@
-package org.example.learning.mini_exercise.examples;
+package org.example.learning.mini_exercise.examplesStream;
 
 import org.example.learning.mini_exercise.datamocking.MockData;
 import org.example.learning.mini_exercise.entities.Person;
 import org.junit.Test;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class DistinctAndSets {
 

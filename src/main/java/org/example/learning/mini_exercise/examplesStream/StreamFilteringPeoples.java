@@ -1,4 +1,4 @@
-package org.example.learning.mini_exercise.examples;
+package org.example.learning.mini_exercise.examplesStream;
 
 
 import org.example.learning.mini_exercise.datamocking.MockData;
@@ -6,10 +6,8 @@ import org.example.learning.mini_exercise.entities.Person;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class StreamFilteringPeoples {

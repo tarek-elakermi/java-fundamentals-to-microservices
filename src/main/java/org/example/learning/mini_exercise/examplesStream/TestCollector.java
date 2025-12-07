@@ -1,4 +1,4 @@
-package org.example.learning.mini_exercise.examples;
+package org.example.learning.mini_exercise.examplesStream;
 
 import org.example.learning.mini_exercise.datamocking.MockData;
 import org.example.learning.mini_exercise.entities.Person;

@@ -1,4 +1,4 @@
-package org.example.learning.mini_exercise.examples;
+package org.example.learning.mini_exercise.examplesStream;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,14 +8,10 @@ import org.example.learning.mini_exercise.entities.Car;
 import org.example.learning.mini_exercise.entities.Person;
 import org.junit.Test;
 
-import javax.crypto.spec.PSource;
 import java.text.DecimalFormat;
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class AdvancedStreamChallenges {
 
