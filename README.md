@@ -5,12 +5,11 @@ This repository documents **every step** of my journey — code, notes, exercise
 
 ## 📅 Learning Roadmap Progress
 ### Weeks 1–4 — Java Fundamentals & Tooling  
-- [ ] Java OOP  
-- [ ] Collections Framework  
-- [ ] Streams & Optionals  
-- [ ] Concurrency basics  
-- [ ] Git, Maven/Gradle  
-- [ ] SQL basics + JDBC  
+- [x] Java OOP  
+- [x] Collections Framework  
+- [x] Streams & Optionals  
+- [x] Git, Maven  
+- [x] SQL basics + JDBC  
 - [ ] JUnit 5 testing 
 
 ### Weeks 5–8 — Spring Boot & REST  
@@ -49,7 +48,37 @@ This repository documents **every step** of my journey — code, notes, exercise
 ### **Week 1 — Java Fundamentals**
 - Practicing Streams, Optionals  
 - Exercises implemented  
-- Notes: *(to be updated as I go)*  
+- Notes:
+- ### **Week 1 — Java Fundamentals & Tooling**
+
+####  Deliverables
+- CLI-based Java application connected to PostgreSQL
+- Database versioning using Flyway migrations
+- Connection pooling using HikariCP
+- Maven project structure
+- Unit testing with JUnit 5
+
+####  Project Location
+- month1_java_fundamentals/deliverables1_cli_db_App/cli-db-app
+  
+####  Technical Highlights
+- Flyway migration:
+  - `V1__create_users_table.sql`
+- Custom datasource configuration
+- Clean separation between configuration, application logic, and tests
+- Tests validating datasource and application startup
+
+####  Concepts Practiced
+- Java Streams & Optionals
+- JDBC fundamentals
+- Maven dependency management
+- Git commit discipline
+- Writing testable Java code
+
+####  Notes
+This week focused on **foundational correctness over complexity** — building a small but realistic Java application using professional tooling commonly used in production systems.
+
+ 
 
 ---
 
