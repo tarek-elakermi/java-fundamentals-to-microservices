@@ -29,7 +29,14 @@
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
-            <version>10.11.1</version>
+            <version>11.19.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-database-postgresql</artifactId>
+            <version>11.19.0</version>
+            <scope>runtime</scope>
         </dependency>
 
         <!-- HikariCP connection pool -->
@@ -53,6 +60,14 @@
             <version>5.10.2</version>
             <scope>test</scope>
         </dependency>
+        <!--
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+         -->
 
     </dependencies>
 

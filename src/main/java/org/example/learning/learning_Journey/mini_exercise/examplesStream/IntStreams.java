@@ -11,7 +11,7 @@ import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static org.junit.Assert.assertArrayEquals;
+
 
 public class IntStreams {
 
