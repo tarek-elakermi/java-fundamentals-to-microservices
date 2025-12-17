@@ -45,12 +45,13 @@ This repository documents **every step** of my journey — code, notes, exercise
 
 ##  Week-by-Week Notes
 
+ 
+- ### **Month 1 — Java Fundamentals & Tooling**
+- 
 ### **Week 1 — Java Fundamentals**
-- Practicing Streams, Optionals  
-- Exercises implemented  
-- Notes:
-- ### **Week 1 — Java Fundamentals & Tooling**
-
+- Practicing Streams, Optionals
+- Exercises implemented
+- 
 ####  Deliverables
 - CLI-based Java application connected to PostgreSQL
 - Database versioning using Flyway migrations
@@ -72,11 +73,33 @@ This repository documents **every step** of my journey — code, notes, exercise
 - Java Streams & Optionals
 - JDBC fundamentals
 - Maven dependency management
+- HikariCP config + flyway migration config
 - Git commit discipline
 - Writing testable Java code
 
 ####  Notes
 This week focused on **foundational correctness over complexity** — building a small but realistic Java application using professional tooling commonly used in production systems.
+---
+
+### **Month 2 — Next Phase — Spring Boot & REST APIs (Step 2)**
+
+Starting **Step 2** of the roadmap, the focus shifts from core Java fundamentals to **Spring Boot and backend application development**.
+
+###  Objectives
+- Understand Spring Boot fundamentals and autoconfiguration
+- Build RESTful APIs
+- Apply validation and DTO patterns
+- Use Spring Data JPA for persistence
+- Write integration and controller tests
+
+###  Planned Deliverables
+- Spring Boot REST API project
+- CRUD endpoints with validation
+- PostgreSQL integration using Spring Data JPA
+- OpenAPI / Swagger documentation
+- Integration tests using Testcontainers (later phase)
+
+This phase builds directly on the foundations from Month 1 and moves toward **production-ready backend services**.
 
  
 
