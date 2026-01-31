@@ -1,0 +1,6 @@
+CREATE SEQUENCE my_seq START WITH 1 INCREMENT BY 1;
+
+CREATE TABLE test_entity (
+    id BIGINT PRIMARY KEY,
+    entity_name VARCHAR(255)
+);
