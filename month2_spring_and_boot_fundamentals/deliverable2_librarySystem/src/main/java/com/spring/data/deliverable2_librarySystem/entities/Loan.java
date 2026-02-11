@@ -1,6 +1,7 @@
 package com.spring.data.deliverable2_librarySystem.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.spring.data.deliverable2_librarySystem.entities.enums.LoanStatus;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -64,6 +65,14 @@ public class Loan {
     public boolean isOverdue() {
         return status == LoanStatus.ACTIVE &&
                 LocalDate.now().isAfter(dueDate);
+    }
+
+    public long getDaysOverdue() {
+        LocalDate checkDate = this.returnDate != null ? this.returnDate : LocalDate.now();
+        if (checkDate.isAfter(this.dueDate)) {
+            return java.time.temporal.ChronoUnit.DAYS.between(this.dueDate, checkDate);
+        }
+        return 0;
     }
 
     public Long getId() {

@@ -3,6 +3,8 @@ package com.spring.data.deliverable2_librarySystem.services;
 
 import com.spring.data.deliverable2_librarySystem.dao.ReportDao;
 import com.spring.data.deliverable2_librarySystem.entities.*;
+import com.spring.data.deliverable2_librarySystem.entities.enums.LoanStatus;
+import com.spring.data.deliverable2_librarySystem.entities.enums.MembershipStatus;
 import com.spring.data.deliverable2_librarySystem.repositories.BookRepository;
 import com.spring.data.deliverable2_librarySystem.repositories.LoanRepository;
 import com.spring.data.deliverable2_librarySystem.repositories.MemberRepository;
@@ -66,16 +68,24 @@ public class LoanService {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new RuntimeException("Member not found"));
 
-        Loan loan = loanRepository.findById(loanId)
-                .orElseThrow(() -> new RuntimeException("Loan not found"));
-        loan.returnBook();
+        Loan loan = loanRepository.findByIdAndMemberId(loanId, memberId)
+                .orElseThrow(() -> new RuntimeException(
+                        "Loan " + loanId + " not found for member " + memberId
+                ));
 
-        if (loan.isOverdue()){
-            member.setStatus(MembershipStatus.SUSPENDED);
-            memberRepository.save(member);
+        if (loan.getStatus() == LoanStatus.RETURNED) {
+            throw new RuntimeException("Book already returned on " + loan.getReturnDate());
         }
 
+        boolean wasOverdue = loan.isOverdue();
 
+        loan.returnBook();
+
+        if (wasOverdue){
+            member.setStatus(MembershipStatus.SUSPENDED);
+            loan.setStatus(LoanStatus.OVERDUE);
+            memberRepository.save(member);
+        }
 
         return loanRepository.save(loan);
     }

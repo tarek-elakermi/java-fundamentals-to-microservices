@@ -1,6 +1,7 @@
 package com.spring.data.deliverable2_librarySystem.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.spring.data.deliverable2_librarySystem.entities.enums.MembershipStatus;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;

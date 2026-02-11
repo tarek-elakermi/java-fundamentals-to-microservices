@@ -64,6 +64,21 @@ public class ReportDao {
         return jdbcTemplate.queryForList(sql);
     }
 
+    public void clearReportData() {
+        jdbcTemplate.execute("""
+                DELETE FROM book_report
+                """);
+    }
+
+    public void insertBookReport(Long bookId, String title, int borrowCount) {
+        String sql = """
+                MERGE INTO book_report (book_id, title, borrow_count)
+                KEY(book_id)
+                VALUES(?,?,?)
+                """;
+        jdbcTemplate.update(sql,bookId,title,borrowCount);
+    }
+
 
 
 

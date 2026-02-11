@@ -23,7 +23,7 @@ public class LoanController {
         return ResponseEntity.ok(loanService.borrowBook(memberId, bookId));
     }
 
-    @PostMapping("/return/{loanId}")
+    @PostMapping("/return/{loanId}/{memberId}")
     public ResponseEntity<Loan> returnBook(@PathVariable Long loanId, @PathVariable Long memberId) {
         return ResponseEntity.ok(loanService.returnBook(loanId, memberId));
     }

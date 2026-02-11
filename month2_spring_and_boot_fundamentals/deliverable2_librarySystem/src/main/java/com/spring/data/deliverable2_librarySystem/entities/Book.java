@@ -1,5 +1,6 @@
 package com.spring.data.deliverable2_librarySystem.entities;
 
+import com.spring.data.deliverable2_librarySystem.entities.enums.Genre;
 import jakarta.persistence.*;
 
 import java.util.Set;
