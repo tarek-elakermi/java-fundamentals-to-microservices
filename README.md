@@ -146,53 +146,35 @@ No UI, no security — just pure data access, transactions, and architecture.
 ------------------------------------------------------------------
 
 #### 📊 **Domain Model**
-+----------------+         1        +----------------+
-|     Author     |◄───────────────►|      Book      |
-+----------------+         N        +----------------+
-| PK: id         |                  | PK: id         |
-| name           |                  | title          |
-| nationality    |                  | isbn           |
-| birth_date     |                  | publication_yr |
-+----------------+                  | genre          |
-                                    | FK: author_id  |
-                                    +----------------+
-                                              |
-                                              | 1
-                                              | 
-                                              | N
-                                    +----------------+
-                                    |      Loan      |
-                                    +----------------+
-                                    | PK: id         |
-                                    | borrow_date    |
-                                    | due_date       |
-                                    | return_date    |
-                                    | status         |
-                                    | FK: book_id    |
-                                    | FK: member_id  |
-                                    +----------------+
-                                              |
-                                              | 1
-                                              |
-                                              | N
-                                    +----------------+
-                                    |     Member     |
-                                    +----------------+
-                                    | PK: id         |
-                                    | first_name     |
-                                    | last_name      |
-                                    | email          |
-                                    | membership_date|
-                                    | status         |
-                                    +----------------+
+---
 
-┌──────────────┬────────────┬──────────────────┬──────────────────┐
-│ Relationship │   Type     │    From → To     │  Cardinality     │
-├──────────────┼────────────┼──────────────────┼──────────────────┤
-│ Author → Book│ One-to-Many│ 1 Author : N Books│ 1 ──────── N    │
-│ Book → Loan  │ One-to-Many│ 1 Book  : N Loans │ 1 ──────── N    │
-│ Member → Loan│ One-to-Many│ 1 Member : N Loans│ 1 ──────── N    │
-└──────────────┴────────────┴──────────────────┴──────────────────┘
+### 🧩 **Entities Overview**
+
+| Entity | Table Name | Primary Key | Description | Relationships |
+|--------|-----------|-------------|-------------|---------------|
+| **Author** | `authors` | `id` | Person who writes books | One-to-Many with Book |
+| **Book** | `books` | `id` | Physical book that can be borrowed | Many-to-One with Author <br> One-to-Many with Loan |
+| **Member** | `members` | `id` | Person who borrows books | One-to-Many with Loan |
+| **Loan** | `loans` | `id` | Record of a book being borrowed | Many-to-One with Book <br> Many-to-One with Member |
+
+---
+
+### 🔗 **Relationship Matrix**
+
+|              | **Author** | **Book** | **Member** | **Loan** |
+|--------------|-----------|----------|------------|----------|
+| **Author**   | - | 1 → N | - | - |
+| **Book**     | N → 1 | - | - | 1 → N |
+| **Member**   | - | - | - | 1 → N |
+| **Loan**     | - | N → 1 | N → 1 | - |
+
+**Legend:** `1 → N` = One-to-Many | `N → 1` = Many-to-One
+
+---
+
+### 📋 **Entity Details**
+
+---
 ------------------------------------------------------
 #### 🌐 **REST API Endpoints**
 | Method | Endpoint | Description | Database |
