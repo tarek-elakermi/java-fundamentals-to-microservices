@@ -128,31 +128,21 @@ No UI, no security — just pure data access, transactions, and architecture.
 | ✅ Reporting cache | H2 auto-populated from MySQL on startup |
 --------------------------------------------------------------------------------
 #### 🏗️ **Architecture Overview**
-┌─────────────────────────────────────────────────────────────┐
-│ SPRING BOOT APPLICATION │
-├─────────────────────────────────────────────────────────────┤
-│ │
-│ ┌─────────────────┐ ┌─────────────────────────┐ │
-│ │ JPA Layer │ │ JDBC Layer │ │
-│ │ @Repository │ │ @Dao │ │
-│ │ Spring Data │ │ Explicit SQL │ │
-│ └────────┬────────┘ └───────────┬─────────────┘ │
-│ │ │ │
-│ ▼ ▼ │
-│ ┌─────────────────┐ ┌─────────────────────────┐ │
-│ │ MySQL │ │ H2 (in-memory) │ │
-│ │ Permanent DB │ │ Reporting Cache │ │
-│ │ - Authors │ │ - book_report │ │
-│ │ - Books │ │ - borrow statistics │ │
-│ │ - Members │ │ │ │
-│ │ - Loans │ │ │ │
-│ └─────────────────┘ └─────────────────────────┘ │
-│ │
-│ ↑ ↑ │
-│ └───────────────┬───────────────┘ │
-│ DataSyncService │
-│ (Auto-sync on startup + manual) │
-└─────────────────────────────────────────────────────────────┘
+| Layer | Technology | Database | Purpose | Key Components |
+|-------|-----------|----------|---------|----------------|
+| **PRESENTATION** | Spring MVC | - | REST API endpoints | `@RestController` <br> DTOs (future) <br> HTTP request/response |
+| ↓ | | | |
+| **SERVICE** | Spring `@Service` | - | Business logic <br> Transaction boundaries | `LoanService` <br> `ReportService` <br> `DataSyncService` <br> `@Transactional` |
+| ↓ | | | |
+| **DATA ACCESS** | **Spring Data JPA** | **MySQL** | **Write Operations** <br> Entity management <br> CRUD operations <br> Relationships | `AuthorRepository` <br> `BookRepository` <br> `MemberRepository` <br> `LoanRepository` |
+| | **JDBC Template** | **H2** | **Read/Reporting** <br> Aggregation queries <br> Explicit SQL <br> Performance analytics | `ReportDao` <br> `JdbcTemplate` <br> `book_report` table |
+| ↓ | | | |
+| **DATABASE** | **MySQL** | **Permanent** | Transactional data <br> ACID compliance <br> Entity relationships <br> Historical records | Tables: <br> • authors <br> • books <br> • members <br> • loans |
+| | **H2** | **In-Memory** | Reporting cache <br> Aggregated stats <br> Fast read access <br> **Volatile** (resets on restart) | Tables: <br> • book_report <br> • borrow_counts |
+| ↓ | | | |
+| **SYNC LAYER** | **DataSyncService** | MySQL → H2 | Auto-populate H2 on startup <br> Manual refresh on demand <br> Keep reports up-to-date | `@PostConstruct` <br> `POST /api/sync/now` <br> `GET /api/sync/status` |
+
+---
 ------------------------------------------------------------------
 
 #### 📊 **Domain Model**
