@@ -13,9 +13,12 @@ This repository documents **every step** of my journey — code, notes, exercise
 - [ ] JUnit 5 testing 
 
 ### Weeks 5–8 — Spring Boot & REST  
-- [ ] Spring Boot fundamentals  
-- [ ] Validation + DTOs  
-- [ ] Spring Data JPA  
+- [x] Spring Boot fundamentals  
+- [x] Validation + DTOs  
+- [x] Spring Data JPA
+- [ ] Spring Security
+- [ ] Spring batch
+- [ ] Spring AI
 - [ ] Testing REST APIs  
 - [ ] OpenAPI documentation  
 
@@ -83,10 +86,12 @@ This week focused on **foundational correctness over complexity** — building a
 
 ### **Month 2 — Next Phase — Spring Boot & REST APIs (Step 2)**
 
-Starting **Step 2** of the roadmap, the focus shifts from core Java fundamentals to **Spring Boot and backend application development**.
+Starting **Step 2** of the roadmap, the focus shifts from core Java fundamentals to **Spring / Spring Boot and backend application development**.
+
+==> Due to Work situation and time complexity this phase could take longer than 1 month
 
 ###  Objectives
-- Understand Spring Boot fundamentals and autoconfiguration
+- Understand Spring/Spring Boot fundamentals and auto-configuration
 - Build RESTful APIs
 - Apply validation and DTO patterns
 - Use Spring Data JPA for persistence
@@ -95,11 +100,172 @@ Starting **Step 2** of the roadmap, the focus shifts from core Java fundamentals
 ###  Planned Deliverables
 - Spring Boot REST API project
 - CRUD endpoints with validation
-- PostgreSQL integration using Spring Data JPA
-- OpenAPI / Swagger documentation
+- Mysql/Postgresql integration using Spring Data JPA
+- OpenAPI / Swagger documentation / Postman for end point test
 - Integration tests using Testcontainers (later phase)
 
 This phase builds directly on the foundations from Month 1 and moves toward **production-ready backend services**.
+
+### 🏛️ Library System Lab: Multi-Database Architecture
+A backend library management system demonstrating **polyglot persistence** with two databases working side by side.
+
+####  Project Location
+- month2_spring_fundamentals/deliverable2_library_system
+------------
+#### 🎯 **Project Purpose**
+This lab was designed to consolidate practical knowledge of Spring persistence technologies by building a real system with **two databases**, each serving a distinct purpose:
+- **MySQL** → Transactional database (JPA) for domain operations
+- **H2** → In-memory reporting database (JDBC) for analytics
+
+No UI, no security — just pure data access, transactions, and architecture.
+------------------------------------------------------
+#### ✅ **Learning Objectives Achieved**
+
+| Concept | Implementation |
+|--------|----------------|
+| ✅ Multiple DataSources | Configured MySQL + H2 in one Spring Boot app |
+| ✅ Spring Data JPA | Entities, repositories, relationships |
+| ✅ JDBC + explicit SQL | Reporting queries against H2 |
+| ✅ Hibernate mappings | `@OneToMany`, `@ManyToOne`, fetch strategies, cascade |
+| ✅ Transaction management | `@Transactional` across two databases |
+| ✅ DAO vs Repository | JPA repositories for entities, JDBC DAO for reports |
+| ✅ Bidirectional relationships | Helper methods to keep both sides in sync |
+| ✅ Reporting cache | H2 auto-populated from MySQL on startup |
+--------------------------------------------------------------------------------
+#### 🏗️ **Architecture Overview**
+| Layer | Technology | Database | Purpose | Key Components |
+|-------|-----------|----------|---------|----------------|
+| **PRESENTATION** | Spring MVC | - | REST API endpoints | `@RestController` <br> DTOs (future) <br> HTTP request/response |
+| ↓ | | | |
+| **SERVICE** | Spring `@Service` | - | Business logic <br> Transaction boundaries | `LoanService` <br> `ReportService` <br> `DataSyncService` <br> `@Transactional` |
+| ↓ | | | |
+| **DATA ACCESS** | **Spring Data JPA** | **MySQL** | **Write Operations** <br> Entity management <br> CRUD operations <br> Relationships | `AuthorRepository` <br> `BookRepository` <br> `MemberRepository` <br> `LoanRepository` |
+| | **JDBC Template** | **H2** | **Read/Reporting** <br> Aggregation queries <br> Explicit SQL <br> Performance analytics | `ReportDao` <br> `JdbcTemplate` <br> `book_report` table |
+| ↓ | | | |
+| **DATABASE** | **MySQL** | **Permanent** | Transactional data <br> ACID compliance <br> Entity relationships <br> Historical records | Tables: <br> • authors <br> • books <br> • members <br> • loans |
+| | **H2** | **In-Memory** | Reporting cache <br> Aggregated stats <br> Fast read access <br> **Volatile** (resets on restart) | Tables: <br> • book_report <br> • borrow_counts |
+| ↓ | | | |
+| **SYNC LAYER** | **DataSyncService** | MySQL → H2 | Auto-populate H2 on startup <br> Manual refresh on demand <br> Keep reports up-to-date | `@PostConstruct` <br> `POST /api/sync/now` <br> `GET /api/sync/status` |
+
+------------------------------------------------------------------
+
+#### 📊 **Domain Model**
+---
+
+### 🧩 **Entities Overview**
+
+| Entity | Table Name | Primary Key | Description | Relationships |
+|--------|-----------|-------------|-------------|---------------|
+| **Author** | `authors` | `id` | Person who writes books | One-to-Many with Book |
+| **Book** | `books` | `id` | Physical book that can be borrowed | Many-to-One with Author <br> One-to-Many with Loan |
+| **Member** | `members` | `id` | Person who borrows books | One-to-Many with Loan |
+| **Loan** | `loans` | `id` | Record of a book being borrowed | Many-to-One with Book <br> Many-to-One with Member |
+
+---
+
+### 🔗 **Relationship Matrix**
+
+|              | **Author** | **Book** | **Member** | **Loan** |
+|--------------|-----------|----------|------------|----------|
+| **Author**   | - | 1 → N | - | - |
+| **Book**     | N → 1 | - | - | 1 → N |
+| **Member**   | - | - | - | 1 → N |
+| **Loan**     | - | N → 1 | N → 1 | - |
+
+**Legend:** `1 → N` = One-to-Many | `N → 1` = Many-to-One
+
+------------------------------------------------------
+#### 🌐 **REST API Endpoints**
+| Method | Endpoint | Description | Database |
+|--------|---------|-------------|----------|
+| **Authors** |
+| POST | `/api/authors` | Create new author | MySQL |
+| GET | `/api/authors` | List all authors | MySQL |
+| GET | `/api/authors/{id}` | Get author by ID | MySQL |
+| PUT | `/api/authors/{id}` | Update author | MySQL |
+| DELETE | `/api/authors/{id}` | Delete author | MySQL |
+| **Books** |
+| POST | `/api/books?authorId={id}` | Create book | MySQL |
+| GET | `/api/books` | List all books | MySQL |
+| GET | `/api/books/{id}` | Get book by ID | MySQL |
+| GET | `/api/books/author/{authorId}` | Books by author | MySQL |
+| **Members** |
+| POST | `/api/members` | Register member | MySQL |
+| GET | `/api/members` | List members | MySQL |
+| GET | `/api/members/{id}` | Get member | MySQL |
+| **Loans** |
+| POST | `/api/loans/borrow?memberId={id}&bookId={id}` | Borrow book | MySQL + H2 |
+| POST | `/api/loans/return/{loanId}/{memberId}` | Return book | MySQL + H2 |
+| GET | `/api/loans/active` | Active loans | MySQL |
+| GET | `/api/loans/overdue` | Overdue loans | MySQL |
+| GET | `/api/loans/member/{memberId}` | Member's loans | MySQL |
+| **Reports (H2)** |
+| GET | `/api/reports/most-borrowed` | Top 10 books | H2 |
+| GET | `/api/reports/stats` | Book statistics | H2 |
+| GET | `/api/reports/status` | H2 health check | H2 |
+| **Sync** |
+| POST | `/api/sync/now` | Manual H2 refresh | MySQL → H2 |
+| GET | `/api/sync/status` | Sync service status | - |
+
+-------------------------------------------------
+
+####  **H2 Reporting Schema**
+
+```sql
+CREATE TABLE IF NOT EXISTS book_report (
+    book_id BIGINT PRIMARY KEY,
+    title VARCHAR(255),
+    borrow_count INT DEFAULT 0
+);
+```
+### **Project Structure**
+
+month2_spring_fundamentals/
+└── deliverable2_library_system/
+    ├── src/main/java/.../
+    │   ├── config/
+    │   │   ├── DatabasesConfig.java    # MySQL + H2 data sources
+    │   │   └── JpaConfig.java          # JPA configuration
+    │   │
+    │   ├── entities/
+    │   │   ├── Author.java
+    │   │   ├── Book.java
+    │   │   ├── Member.java
+    │   │   ├── Loan.java
+    │   │   └── enums/
+    │   │       ├── Genre.java
+    │   │       ├── LoanStatus.java
+    │   │       └── MembershipStatus.java
+    │   │
+    │   ├── repositories/               # Spring Data JPA
+    │   │   ├── AuthorRepository.java
+    │   │   ├── BookRepository.java
+    │   │   ├── MemberRepository.java
+    │   │   └── LoanRepository.java
+    │   │
+    │   ├── dao/                       # JDBC for H2
+    │   │   └── ReportDao.java
+    │   │
+    │   ├── service/
+    │   │   ├── AuthorService.java
+    │   │   ├── BookService.java
+    │   │   ├── MemberService.java
+    │   │   ├── LoanService.java       # @Transactional across DBs
+    │   │   ├── ReportService.java     # H2 reports
+    │   │   └── DataSyncService.java   # Auto + manual sync
+    │   │
+    │   └── controller/                # REST endpoints
+    │       ├── AuthorController.java
+    │       ├── BookController.java
+    │       ├── MemberController.java
+    │       ├── LoanController.java
+    │       ├── ReportController.java
+    │       └── DataSyncController.java
+    │
+    └── src/main/resources/
+        ├── application.properties     # DB credentials
+        └── schema-h2.sql             # H2 table definition
+
 
  
 
