@@ -13,9 +13,12 @@ This repository documents **every step** of my journey — code, notes, exercise
 - [ ] JUnit 5 testing 
 
 ### Weeks 5–8 — Spring Boot & REST  
-- [ ] Spring Boot fundamentals  
-- [ ] Validation + DTOs  
-- [ ] Spring Data JPA  
+- [x] Spring Boot fundamentals  
+- [x] Validation + DTOs  
+- [x] Spring Data JPA
+- [ ] Spring Security
+- [ ] Spring batch
+- [ ] Spring AI
 - [ ] Testing REST APIs  
 - [ ] OpenAPI documentation  
 
@@ -83,10 +86,12 @@ This week focused on **foundational correctness over complexity** — building a
 
 ### **Month 2 — Next Phase — Spring Boot & REST APIs (Step 2)**
 
-Starting **Step 2** of the roadmap, the focus shifts from core Java fundamentals to **Spring Boot and backend application development**.
+Starting **Step 2** of the roadmap, the focus shifts from core Java fundamentals to **Spring / Spring Boot and backend application development**.
+
+==> Due to Work situation and time complexity this phase could take longer than 1 month
 
 ###  Objectives
-- Understand Spring Boot fundamentals and autoconfiguration
+- Understand Spring/Spring Boot fundamentals and auto-configuration
 - Build RESTful APIs
 - Apply validation and DTO patterns
 - Use Spring Data JPA for persistence
@@ -142,7 +147,6 @@ No UI, no security — just pure data access, transactions, and architecture.
 | ↓ | | | |
 | **SYNC LAYER** | **DataSyncService** | MySQL → H2 | Auto-populate H2 on startup <br> Manual refresh on demand <br> Keep reports up-to-date | `@PostConstruct` <br> `POST /api/sync/now` <br> `GET /api/sync/status` |
 
----
 ------------------------------------------------------------------
 
 #### 📊 **Domain Model**
