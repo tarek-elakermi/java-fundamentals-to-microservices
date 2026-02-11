@@ -170,11 +170,6 @@ No UI, no security — just pure data access, transactions, and architecture.
 
 **Legend:** `1 → N` = One-to-Many | `N → 1` = Many-to-One
 
----
-
-### 📋 **Entity Details**
-
----
 ------------------------------------------------------
 #### 🌐 **REST API Endpoints**
 | Method | Endpoint | Description | Database |
